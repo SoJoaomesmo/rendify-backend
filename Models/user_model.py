@@ -1,10 +1,9 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask import Blueprint, request, jsonify
 import werkzeug.security
+from Extras import db
 
-db = SQLAlchemy()
-
-class User(db.Model):
+class User(db.db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(30), unique=True)
     password_hash = db.Column(db.String(128), nullable=True)
