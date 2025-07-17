@@ -16,7 +16,7 @@ Rendify Backend is the backend repository for the **Rendify** application. It ha
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/seu-usuario/rendify-backend.git
+git clone https://github.com/MauricioReisdoefer/rendify-backend
 cd rendify-backend
 ```
 
