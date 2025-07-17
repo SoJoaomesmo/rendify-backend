@@ -3,7 +3,6 @@ from Models.stock_model import StockModel
 from Extras import db
 from twelvedata import TDClient
 
-stock_bp = Blueprint('stocks', __name__)
 td = TDClient(apikey="d84cec2223444503b9878a61089236ca")
 
 def get_or_create_stock(symbol):

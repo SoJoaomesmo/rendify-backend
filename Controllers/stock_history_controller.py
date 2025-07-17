@@ -48,8 +48,8 @@ def add_stock_history(stock_id):
         price=price_today,
         change=change
     )
-    db.session.add(new_entry)
-    db.session.commit()
+    db.db.session.add(new_entry)
+    db.db.session.commit()
 
     return jsonify({
         "Message": "History suceffuly saved",

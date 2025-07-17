@@ -15,8 +15,8 @@ def register():
 
     user = UserModel.User(name=name)
     user.change_password(password)
-    db.session.add(user)
-    db.session.commit()
+    db.db.session.add(user)
+    db.db.session.commit()
 
     return jsonify({"Message": "User created", "Status": 201, "Result": {"name": name}}), 201
 
@@ -43,6 +43,6 @@ def change_password():
         return jsonify({"Message": "User not found", "Status": 404, "Result": "Error"}), 404
 
     result = user.change_password(new_password)
-    db.session.commit()
+    db.db.session.commit()
     status = result["Status"]
     return jsonify(result), status

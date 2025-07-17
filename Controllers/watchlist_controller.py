@@ -9,8 +9,8 @@ def add_to_watchlist(user_id, symbol):
         return {"Message": "Action already in Watchlist", "Status": 409, "Result":"Ok"}
     
     item = Watchlist(user_id=user_id, stock_symbol=symbol)
-    db.session.add(item)
-    db.session.commit()
+    db.db.session.add(item)
+    db.db.session.commit()
     return {"Message": f"Action {symbol} added to Watchlist", "Status": 201, "Result":"Ok"}
 
 def view_watchlist(user_id):
@@ -26,8 +26,8 @@ def view_watchlist(user_id):
 def remove_from_watchlist(user_id, symbol):
     existing = Watchlist.query.filter_by(user_id=user_id, stock_symbol=symbol).first()
     if existing:
-        db.session.delete(existing)
-        db.session.commit()
+        db.db.session.delete(existing)
+        db.db.session.commit()
         return {
             "Message": f"Action {symbol} removed from Watchlist",
             "Status": 200,
