@@ -5,9 +5,10 @@ from Models.stock_history_model import StockHistory
 from Models.stock_model import StockModel
 from decimal import Decimal
 
-def get_stock_history(stock_id):
-    stock_name = StockModel.query.filter_by(id=stock_id).first()
-    history = StockHistory.query.filter_by(stock_id=stock_id).order_by(StockHistory.date.asc()).all()
+def get_stock_history(symbol):
+    stock_model = StockModel.query.filter_by(symbol=symbol).first()
+    stock_name = StockModel.query.filter_by(id=stock_model.id).first()
+    history = StockHistory.query.filter_by(stock_id=stock_model.id).order_by(StockHistory.date.asc()).all()
     if not history:
         return jsonify({"Message": "No Register from this Stock", "Status":404, "Result":"None"}),
 
@@ -18,10 +19,9 @@ def get_stock_history(stock_id):
             "price": str(entry.price),
             "change": str(entry.change) if entry.change is not None else None
         })
-    return jsonify({"Message":f"History of {stock_name.name}", "Result": result, "Status":200})
+    return jsonify({"Message":f"History of {stock_name.symbol}", "Result": result, "Status":200})
 
-def add_stock_history(stock_id):
-    data = request.get_json()
+def add_stock_history(stock_id, data):
     if not data or 'price' not in data:
         return jsonify({"Message": "Data 'price' is obrigatory", "Result":"None", "Status":400})
 

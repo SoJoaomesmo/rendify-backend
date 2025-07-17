@@ -14,7 +14,3 @@ def login():
 @user_bp.route('/change-password', methods=['POST'])
 def change_pass():
     return user_controller.change_password()
-
-@user_bp.route("/")
-def index():
-    return {"/USER EXISTE": "USER"}

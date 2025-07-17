@@ -8,4 +8,4 @@ class StockHistory(db.db.Model):
     price = db.db.Column(db.db.Numeric(18, 8), nullable=False)
     change = db.db.Column(db.db.Numeric(18, 8))  # EM NÚMERO, não porcentagem
 
-    stock = db.relationship('StockModel', backref=db.backref('history', lazy=True))
+    stock = db.db.relationship('StockModel', backref=db.db.backref('history', lazy=True))

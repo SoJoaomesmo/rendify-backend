@@ -1,13 +1,11 @@
 from Routes import user_route
 from flask import Flask
 from Extras import db
-from Routes import user_route
+from Routes import user_route, stock_routes
 
 app = Flask(__name__)
 app.register_blueprint(user_route.user_bp, url_prefix='/user')
-@app.route("/")
-def index():
-    return {"Foi":"Foi"}, 200
+app.register_blueprint(stock_routes.stock_bp, url_prefix='/stock')
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'  
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
