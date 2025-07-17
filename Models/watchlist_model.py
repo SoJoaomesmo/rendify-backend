@@ -4,8 +4,8 @@ from Extras import db
 import werkzeug.security
 
 class Watchlist(db.db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    stock_symbol = db.Column(db.String(10), nullable=False)  # "AAPL", "PETR4"
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    id = db.db.Column(db.db.Integer, primary_key=True)
+    stock_symbol = db.db.Column(db.db.String(10), nullable=False)  # "AAPL", "PETR4"
+    user_id = db.db.Column(db.db.Integer, db.db.ForeignKey('user.id'), nullable=False)
 
-    user = db.relationship('User', backref=db.backref('watchlist', lazy=True))
+    user = db.db.relationship('User', backref=db.db.backref('watchlist', lazy=True))

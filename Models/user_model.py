@@ -4,9 +4,9 @@ import werkzeug.security
 from Extras import db
 
 class User(db.db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(30), unique=True)
-    password_hash = db.Column(db.String(128), nullable=True)
+    id = db.db.Column(db.db.Integer, primary_key=True)
+    name = db.db.Column(db.db.String(30), unique=True)
+    password_hash = db.db.Column(db.db.String(128), nullable=True)
     
     def check_password(self, password_to_check:str): #  werkzeug.security.check_password_hash(self.password_hash, password_to_check)]
         if(password_to_check is None):
