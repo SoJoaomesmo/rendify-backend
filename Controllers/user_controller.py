@@ -18,7 +18,7 @@ def register():
     db.db.session.add(user)
     db.db.session.commit()
 
-    return jsonify({"Message": "User created", "Status": 201, "Result": {"name": name}})
+    return jsonify({"Message": "User created", "Status": 201, "Result": {"name": name, "id":user.id}})
 
 def login():
     data = request.get_json()
@@ -45,3 +45,13 @@ def change_password():
     db.db.session.commit()
     status = result["Status"]
     return jsonify(result), status
+
+def get_user_by_name():
+    data = request.get_json()
+    nome = data.get('name')
+    
+    user = UserModel.User.query.filter_by(name=nome).first()
+    
+    if not user:
+        return jsonify({"Message":"User Not Found", "Status":404, "Result":"Error"})
+    return jsonify({"Message":"User Found", "Status":200, "Result":{"name":nome, "id":user.id}})

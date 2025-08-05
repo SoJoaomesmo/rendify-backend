@@ -3,6 +3,7 @@ from Models.stock_model import StockModel
 from Extras import db
 from twelvedata import TDClient
 from Controllers.stock_history_controller import add_stock_history
+import datetime
 
 td = TDClient(apikey="d84cec2223444503b9878a61089236ca")
 
@@ -17,10 +18,11 @@ def get_or_create_stock(symbol):
         new_stock = None
         if existing_stock:
             existing_stock.price = current_price
+            add_stock_history(existing_stock.id, data=datetime.date.today())
         else:
             new_stock = StockModel(symbol=symbol.upper(), price=current_price)
+            add_stock_history(new_stock.id, data=datetime.date.today())
             db.db.session.add(new_stock)
-
         db.db.session.commit()
         return jsonify({"Result":{
             'symbol': symbol.upper(),
