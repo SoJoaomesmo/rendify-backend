@@ -16,5 +16,5 @@ def change_pass():
     return user_controller.change_password()
 
 @user_bp.route("/get_by_name/<name>")
-def get_by_name():
-    return user_controller.get_user_by_name()
+def get_by_name(name):
+    return user_controller.get_user_by_name(nome=name)

@@ -46,10 +46,7 @@ def change_password():
     status = result["Status"]
     return jsonify(result), status
 
-def get_user_by_name():
-    data = request.get_json()
-    nome = data.get('name')
-    
+def get_user_by_name(nome):
     user = UserModel.User.query.filter_by(name=nome).first()
     
     if not user:
