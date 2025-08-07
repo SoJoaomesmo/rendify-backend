@@ -10,3 +10,7 @@ def get_stock_by_symbol(symbol):
 @stock_bp.route("/history/<symbol>")
 def get_stock_history(symbol):
     return stock_history_controller.get_stock_history(symbol=symbol)
+
+@stock_bp.route("/search/<symbol>")
+def search_stock(symbol):
+    return stock_controller.get_all_stocks(symbols=symbol)
