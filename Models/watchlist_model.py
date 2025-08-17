@@ -1,11 +1,12 @@
-from flask_sqlalchemy import SQLAlchemy
-from flask import Blueprint, request, jsonify
-from Extras import db
-import werkzeug.security
+from Extras.db import db
 
-class Watchlist(db.db.Model):
-    id = db.db.Column(db.db.Integer, primary_key=True)
-    stock_symbol = db.db.Column(db.db.String(10), nullable=False)  # "AAPL", "PETR4"
-    user_id = db.db.Column(db.db.Integer, db.db.ForeignKey('user.id'), nullable=False)
+class Watchlist(db.Model):
+    __tablename__ = "watchlist"
 
-    user = db.db.relationship('User', backref=db.db.backref('watchlist', lazy=True))
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, nullable=False)
+    stock_symbol = db.Column(db.String(20), nullable=False)
+
+    def __init__(self, user_id, stock_symbol):
+        self.user_id = user_id
+        self.stock_symbol = stock_symbol
